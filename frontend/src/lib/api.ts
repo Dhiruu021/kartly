@@ -1,6 +1,16 @@
 import { ICategory, IProduct, IUser, IOrder, ICoupon } from "./types";
 
-const API_BASE = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
+const getApiBase = () => {
+  const envUrl = process.env.NEXT_PUBLIC_API_URL;
+  if (envUrl && envUrl.trim() !== "") {
+    const cleanUrl = envUrl.trim().replace(/\/+$/, "");
+    return cleanUrl.endsWith("/api") ? cleanUrl : `${cleanUrl}/api`;
+  }
+  // Default to live production Render backend for Vercel and production deployments
+  return "https://kartly-backend-1bz8.onrender.com/api";
+};
+
+const API_BASE = getApiBase();
 
 const getHeaders = (token?: string): HeadersInit => {
   const headers: Record<string, string> = {
