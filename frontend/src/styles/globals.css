@@ -1,0 +1,96 @@
+@import url('https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,400..800&family=Geist:wght@400..600&family=Geist+Mono:wght@400..500&display=swap');
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --font-bricolage: 'Bricolage Grotesque', -apple-system, BlinkMacSystemFont, sans-serif;
+  --font-geist-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-geist-mono: 'Geist Mono', monospace;
+
+  --color-canvas: #f2efe9;
+  --color-card: #fbfaf7;
+  --color-ink: #1c1b18;
+  --color-ink-soft: #57544c;
+  --color-ink-faint: #7d796f;
+  --color-line: #e2ddd2;
+  --color-accent: #2f47d0;
+  --color-accent-soft: #e2e6fa;
+
+  --color-sand: #ebe2d4;
+  --color-sage: #dbe4d3;
+  --color-sky: #dbe3ee;
+  --color-blush: #efded7;
+  --color-butter: #f1e7c6;
+  --color-stone: #e5e2db;
+
+  --color-ok: #23784b;
+  --color-ok-soft: #dcefe2;
+  --color-warn: #9a6512;
+  --color-warn-soft: #f6e8cc;
+  --color-danger: #b23a27;
+
+  --radius-tile: 1.75rem;
+  --shadow-tile: 0 1px 0 rgba(28, 27, 24, 0.04), 0 14px 34px -20px rgba(28, 27, 24, 0.2);
+  --ease-out-expo: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+html {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+  font-family: var(--font-geist-sans);
+}
+
+body {
+  background-color: var(--color-canvas);
+  color: var(--color-ink);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+}
+
+::selection {
+  background: var(--color-ink);
+  color: var(--color-canvas);
+}
+
+:focus-visible {
+  outline: 2px solid var(--color-accent);
+  outline-offset: 3px;
+}
+
+.tile {
+  background: var(--color-card);
+  border-radius: var(--radius-tile);
+  box-shadow: var(--shadow-tile);
+}
+
+.display {
+  font-family: var(--font-bricolage);
+  letter-spacing: -0.035em;
+  font-weight: 650;
+  line-height: 0.95;
+}
+
+.tabular {
+  font-variant-numeric: tabular-nums;
+}
+
+/* Custom smooth scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: var(--color-line);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: var(--color-ink-faint);
+}
