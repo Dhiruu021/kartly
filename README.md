@@ -159,7 +159,7 @@ The store comes configured with an official Administrator account:
 
 | Role | Email | Password | Access |
 |---|---|---|---|
-| **Store Owner & Admin** | `owner@kartly.in` | `Kartly123` | Full Admin Dashboard (`/admin`), Product/Category CRUD, Order status updates, Coupon management, Customer metrics |
+| **Store Owner & Admin** | `********` | `********` | Full Admin Dashboard (`/admin`), Product/Category CRUD, Order status updates, Coupon management, Customer metrics |
 
 > Customers can register with their own name, email, and password at `/register` or check out as a guest.
 
