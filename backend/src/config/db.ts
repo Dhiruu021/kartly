@@ -1,8 +1,7 @@
 import mongoose from "mongoose";
-import { MongoMemoryServer } from "mongodb-memory-server";
 import { ENV } from "./env.js";
 
-let mongod: MongoMemoryServer | null = null;
+let mongod: any = null;
 
 export const connectDB = async (): Promise<string> => {
   try {
@@ -16,6 +15,7 @@ export const connectDB = async (): Promise<string> => {
     }
 
     console.log(`No MONGODB_URI provided. Initializing local in-memory MongoDB server for instant zero-config runtime...`);
+    const { MongoMemoryServer } = await import("mongodb-memory-server");
     mongod = await MongoMemoryServer.create();
     uri = mongod.getUri();
     await mongoose.connect(uri);
@@ -23,9 +23,10 @@ export const connectDB = async (): Promise<string> => {
     return uri;
   } catch (error) {
     console.error("MongoDB Connection Error:", error);
-    if (!mongod) {
+    if (!mongod && ENV.NODE_ENV !== "production") {
       console.log("Falling back to In-Memory MongoDB Server...");
       try {
+        const { MongoMemoryServer } = await import("mongodb-memory-server");
         mongod = await MongoMemoryServer.create();
         const fallbackUri = mongod.getUri();
         await mongoose.connect(fallbackUri);

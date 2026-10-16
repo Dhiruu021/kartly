@@ -18,7 +18,7 @@ const startServer = async () => {
 
     const app = createApp();
 
-    const server = app.listen(ENV.PORT, () => {
+    const server = app.listen(ENV.PORT, "0.0.0.0", () => {
       console.log(`\n==================================================`);
       console.log(`✨ KARTLY REST API is live on: http://localhost:${ENV.PORT}`);
       console.log(`🌐 Allowed Frontend Client: ${ENV.CLIENT_URL}`);

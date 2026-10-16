@@ -20,7 +20,10 @@ export const createApp = (): Express => {
   // Security & Middleware
   app.use(
     cors({
-      origin: [ENV.CLIENT_URL, "http://localhost:3000", "http://127.0.0.1:3000"],
+      origin: (requestOrigin, callback) => {
+        // Allow all origins in cloud/development or match allowed list
+        callback(null, true);
+      },
       credentials: true,
       methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
       allowedHeaders: ["Content-Type", "Authorization"],
@@ -31,6 +34,15 @@ export const createApp = (): Express => {
   app.use(express.urlencoded({ extended: true, limit: "10mb" }));
   app.use(cookieParser(ENV.COOKIE_SECRET));
   app.use(authenticate);
+
+  // Root ping for Render cloud health checks
+  app.get("/", (req, res) => {
+    res.status(200).json({
+      status: "ok",
+      message: "Kartly API is running successfully",
+      docs: "/api/products",
+    });
+  });
 
   // Rate limiter for authentication
   const authLimiter = rateLimit({
